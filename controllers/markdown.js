@@ -64,5 +64,35 @@ module.exports = {
         console.log('Create');
         console.log(req.body);
         res.status(202).send({success: 'true', data: req.body});
+    },
+
+    fill : async function(req, res, data) {
+        console.log('FILL');
+
+        f = function(arr){
+            return arr[Math.floor((Math.random()*arr.length))];
+        }
+        nombres = ['Juan', 'Hector', 'Claudia', 'Pedro', 'Daniela', 'Sandra'];
+        apellidos = ['Jauregui', 'Acevedo', 'Plascencia', 'Lopez', 'Perez', 'Rodriguez'];
+        titulos = ['Test', 'Código', 'Prueba', 'Markdown'];
+        numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        var markdown = new Markdown({
+            title:  f(titulos) + ' ' + f(numeros),
+            author: f(nombres) + ' ' + f(apellidos),
+            type: {
+                    id:     1,
+                    name:   'Markdown to Html'
+                },
+                code: {
+                        html:   'HTML',
+                        markdown: 'MARKDOWN'
+                    },
+                hidden: false
+            });            
+        await markdownService.create(markdown);
+    
+        console.log('Creado RANDOM');
+        res.status(202).send( markdown );
     }
 };

@@ -14,6 +14,8 @@ router.use(function(req, res, next) {
 router.get('/', (req, res, next) => res.status(201).send({ success: 'true' }));
 
 // MARKDOWN
+// GET: Random fill
+router.get('/markdown/fill', markdownController.fill);
 // GET: All items
 router.get('/markdown/', markdownController.list);
 // GET: Find a item
